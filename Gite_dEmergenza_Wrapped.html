@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Gite d'Emergenza Wrapped</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Concept: Wrapped a schermate intere, una per capitolo, ognuna con il proprio colore pieno e numeri giganti in Archivo condensato. */
+:root{
+  --ink:#0F0A1F; --paper:#F6F1FF; --lime:#C8FF3E; --violet:#5B2BE0; --pink:#FF3E8A; --orange:#FF7A18; --sky:#36C9FF; --sun:#FFD23F; --deep:#2A1466;
+  --display:'Archivo','Arial Narrow',Impact,sans-serif; --body:'Instrument Sans',system-ui,sans-serif; --mono:'DM Mono',ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;line-height:1.45;margin:0}
+.slide{min-height:100svh;display:flex;align-items:center;justify-content:center;padding-block:clamp(48px,9vh,96px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));scroll-snap-align:start;background:var(--bg);color:var(--fg)}
+.in{width:100%;max-width:880px;min-width:0;display:flex;flex-direction:column;gap:clamp(20px,4vh,36px)}
+.tag{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin:0}
+h1,h2,.big{font-family:var(--display);font-stretch:70%;font-weight:900;line-height:.9;letter-spacing:-.01em;margin:0;text-wrap:balance;text-transform:uppercase}
+h1{font-size:clamp(38px,11vw,176px);overflow-wrap:normal}
+h2{font-size:clamp(36px,9vw,92px);overflow-wrap:anywhere}
+.big{font-size:clamp(88px,26vw,260px);color:var(--acc);line-height:.82}
+p{margin:0}
+.lead{font-size:clamp(17px,2.4vw,22px);max-width:34rem;text-wrap:pretty}
+.mut{opacity:.72}
+.num{font-variant-numeric:tabular-nums}
+.s-intro{--bg:var(--ink);--fg:var(--paper);--acc:var(--lime)}
+.s-num{--bg:var(--lime);--fg:var(--ink);--acc:var(--ink)}
+.s-who{--bg:var(--violet);--fg:var(--paper);--acc:var(--lime)}
+.s-words{--bg:var(--pink);--fg:#1D0612;--acc:#1D0612}
+.s-emoji{--bg:var(--orange);--fg:#21090A;--acc:#21090A}
+.s-time{--bg:var(--ink);--fg:var(--paper);--acc:var(--sky)}
+.s-days{--bg:var(--sky);--fg:#04141C;--acc:#04141C}
+.s-awards{--bg:var(--deep);--fg:var(--paper);--acc:var(--lime)}
+.s-fight{--bg:#FF4B2B;--fg:#1A0503;--acc:#1A0503}
+.s-titles{--bg:#7CFFB2;--fg:#06180F;--acc:#06180F}
+.s-useless{--bg:var(--violet);--fg:var(--paper);--acc:var(--lime)}
+.s-vocab{--bg:var(--paper);--fg:#170F2B;--acc:#5B2BE0}
+.s-mamme{--bg:#FFB6DC;--fg:#2A0618;--acc:#2A0618}
+.s-rec{--bg:var(--sun);--fg:#201700;--acc:#201700}
+.s-cards{--bg:var(--ink);--fg:var(--paper);--acc:var(--lime)}
+.s-end{--bg:var(--violet);--fg:var(--paper);--acc:var(--lime)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 28px}
+.stat b{display:block;font-family:var(--display);font-stretch:70%;font-weight:900;font-size:clamp(34px,6vw,56px);line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:14px;opacity:.78}
+.bars{display:flex;flex-direction:column;gap:7px}
+.row{display:grid;grid-template-columns:minmax(76px,9.5rem) 1fr auto;align-items:center;gap:10px;font-size:15px}
+.row .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.row .tr{height:14px;background:color-mix(in srgb,var(--fg) 14%,transparent);border-radius:7px;overflow:hidden}
+.row .fl{height:100%;background:var(--acc);border-radius:7px;min-width:3px}
+.row .v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;text-align:right;min-width:3.6rem}
+.row.top .nm{font-weight:800}
+.words .row{grid-template-columns:2rem minmax(88px,11rem) 1fr auto}
+.words .rk{font-family:var(--mono);font-size:12px;opacity:.65}
+.words .nm{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:20px;text-transform:uppercase}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px 36px}
+.hours{display:flex;align-items:flex-end;gap:3px;height:200px}
+.hours i{flex:1;background:var(--acc);border-radius:3px 3px 0 0;min-width:0;opacity:.9}
+.hours i.pk{background:var(--lime);opacity:1}
+.hl{display:flex;gap:3px;font-family:var(--mono);font-size:10px;opacity:.7;margin-top:6px}
+.hl span{flex:1;text-align:center;min-width:0}
+.emo{display:flex;flex-wrap:wrap;gap:12px}
+.emo div{background:color-mix(in srgb,var(--fg) 12%,transparent);border-radius:18px;padding:12px 18px;display:flex;align-items:baseline;gap:10px}
+.emo em{font-style:normal;font-size:44px;line-height:1}
+.emo b{font-family:var(--mono);font-weight:500;font-size:15px}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px}
+.aw{background:color-mix(in srgb,var(--fg) 9%,transparent);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.aw .e{font-size:26px;line-height:1}
+.aw h3{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:21px;text-transform:uppercase;margin:6px 0 0}
+.aw .sub{font-size:13px;opacity:.7}
+.aw .who{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:30px;color:var(--acc);text-transform:uppercase;margin-top:10px;overflow-wrap:anywhere}
+.aw .val{font-family:var(--mono);font-size:12px;opacity:.85}
+.recs{display:grid;gap:22px}
+.s-titles .aw{background:color-mix(in srgb,var(--fg) 8%,transparent)}
+.s-titles .aw .who{color:var(--fg)}
+.s-fight .rec b{font-size:clamp(40px,8vw,72px)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:10px}
+.vw{border-top:2px solid color-mix(in srgb,var(--fg) 85%,transparent);padding:10px 0 4px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.vw b{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:30px;line-height:1;text-transform:uppercase;color:var(--acc);overflow-wrap:anywhere}
+.vw span{font-size:15px}
+.vw em{font-family:var(--mono);font-style:normal;font-size:12px;opacity:.7}
+.vh{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:10px 0 0}
+.tt{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin:6px 0 0}
+.rec{display:grid;grid-template-columns:minmax(0,auto) 1fr;gap:6px 22px;align-items:baseline;border-top:2px solid color-mix(in srgb,var(--fg) 30%,transparent);padding-top:14px}
+.rec b{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:clamp(44px,9vw,84px);line-height:.9;font-variant-numeric:tabular-nums}
+.rec p{font-size:16px;max-width:30rem}
+.rec p strong{font-weight:700}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px}
+.pc{border:1px solid color-mix(in srgb,var(--fg) 22%,transparent);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pc header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.pc h3{font-family:var(--display);font-stretch:70%;font-weight:900;font-size:28px;text-transform:uppercase;margin:0;line-height:1;overflow-wrap:anywhere}
+.pc .fe{font-size:24px}
+.pc dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0;font-size:13px}
+.pc dt{opacity:.65}.pc dd{margin:0;text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--lime);color:var(--ink);font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px}
+.you{font-family:var(--mono);font-size:11px;background:var(--paper);color:var(--ink);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+.cue{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.note{font-size:13px;opacity:.7;max-width:40rem}
+@media (prefers-reduced-motion:no-preference){.in>*{animation:up .6s ease-out both}.in>*:nth-child(2){animation-delay:.08s}.in>*:nth-child(3){animation-delay:.16s}}
+@keyframes up{from{transform:translateY(14px)}to{transform:none}}
+@media (max-width:520px){.row{grid-template-columns:minmax(70px,7rem) 1fr auto;font-size:14px}.words .row{grid-template-columns:1.6rem minmax(78px,8.5rem) 1fr auto}.rec{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body>
+<main id="app"></main>
+
+<script>
+const D = {"total": 97440, "first": "2025-10-05", "last": "2026-10-16", "days": 376, "kinds": {"image": 660, "text": 88354, "media_other": 151, "sticker": 2586, "viewonce": 3899, "deleted": 81, "audio": 1012, "call": 48, "video": 234, "poll": 249, "GIF": 123, "Contact card": 43}, "top_words": [["cazzo", 2261], ["andiamo", 2166], ["peso", 1171], ["stase", 1142], ["basta", 1067], ["casa", 978], ["dio", 913], ["qualcuno", 823], ["penso", 822], ["gasa", 763], ["magari", 755], ["andare", 679], ["deep", 675], ["vieni", 654], ["sticazzi", 653], ["quanto", 625], ["pole", 620], ["porcodio", 618], ["mezzo", 595], ["porco", 575]], "swear_total": 5711, "swear_by": [["criminale", 1250], ["Piane", 1183], ["fulvio", 604], ["Gabri Gallina", 363], ["Bossi", 354]], "dio_total": 2842, "sig": {"criminale": ["sennò", 99], "lollo forna": ["ritual", 11], "Gabri Gallina": ["esatto", 28], "cacio": ["musto", 24], "ruiz": ["ella", 35], "bignami": null, "Piane": ["porcozzio", 68], "Bossi": ["diocane", 97], "stockihno": ["porco", 84], "Fornasieri": ["esce", 41], "Goffo": ["bravo", 24], "Anto": ["euro", 44], "fulvio": ["peró", 66], "pinzo": ["silvia", 25], "Lollocosciaa": null, "Pat": ["porcoddio", 46], "montapuercos": ["bravo", 20], "alberto vergani": ["pole", 17], "Keiduz": ["peso", 8], "Valerius🍃": ["stasera", 40], "Marco": null, "Signo": null, "Keo": ["carlo", 9]}, "topword": {"criminale": ["cazzo", 550], "lollo forna": ["dio", 16], "Gabri Gallina": ["andiamo", 201], "cacio": ["andiamo", 104], "ruiz": ["cazzo", 93], "bignami": ["cazzo", 53], "Piane": ["cazzo", 486], "Bossi": ["cazzo", 199], "stockihno": ["peso", 136], "Fornasieri": ["andiamo", 79], "Goffo": ["peso", 52], "Anto": ["cazzo", 71], "fulvio": ["andiamo", 494], "pinzo": ["cazzo", 64], "Lollocosciaa": ["cazzo", 79], "Pat": ["andiamo", 105], "montapuercos": ["magari", 33], "alberto vergani": ["pole", 17], "Keiduz": ["andiamo", 9], "Valerius🍃": ["gasa", 40], "Marco": ["son", 8], "Signo": ["mezzo", 7], "Keo": ["carlo", 9]}, "laughemoji": {"criminale": 904, "lollo forna": 84, "Gabri Gallina": 1167, "cacio": 251, "ruiz": 404, "bignami": 28, "Piane": 1930, "Bossi": 1461, "stockihno": 767, "Fornasieri": 162, "Goffo": 1565, "Anto": 32, "fulvio": 486, "pinzo": 162, "Lollocosciaa": 161, "Pat": 165, "montapuercos": 73, "alberto vergani": 77, "Keiduz": 107, "Valerius🍃": 25, "Marco": 18, "Signo": 66, "Keo": 22}, "card": {"criminale": {"msgs": 16551, "share": 17.0, "avgw": 4.5, "sticker": 1123, "audio": 163, "image": 96, "video": 17, "viewonce": 387, "deleted": 12, "links": 48, "q": 491, "caps": 117, "laughs": 1, "swear": 1250, "peak": 13, "night": 481, "morn": 216, "lat": 13.0, "fav": ["😂"], "sig": ["sennò", 99], "le": 904, "text": 14641}, "lollo forna": {"msgs": 992, "share": 1.0, "avgw": 4.4, "sticker": 18, "audio": 46, "image": 12, "video": 11, "viewonce": 70, "deleted": 3, "links": 3, "q": 83, "caps": 21, "laughs": 5, "swear": 24, "peak": 14, "night": 153, "morn": 39, "lat": 31.0, "fav": ["😂"], "sig": ["ritual", 11], "le": 84, "text": 827}, "Gabri Gallina": {"msgs": 7871, "share": 8.1, "avgw": 3.87, "sticker": 125, "audio": 141, "image": 18, "video": 9, "viewonce": 172, "deleted": 1, "links": 32, "q": 616, "caps": 300, "laughs": 423, "swear": 363, "peak": 21, "night": 202, "morn": 161, "lat": 13.0, "fav": ["😂"], "sig": ["esatto", 28], "le": 1167, "text": 7381}, "cacio": {"msgs": 4563, "share": 4.7, "avgw": 4.61, "sticker": 80, "audio": 17, "image": 234, "video": 7, "viewonce": 300, "deleted": 2, "links": 28, "q": 513, "caps": 20, "laughs": 0, "swear": 214, "peak": 13, "night": 191, "morn": 103, "lat": 14.0, "fav": ["🤣"], "sig": ["musto", 24], "le": 251, "text": 3879}, "ruiz": {"msgs": 4367, "share": 4.5, "avgw": 2.98, "sticker": 115, "audio": 34, "image": 5, "video": 10, "viewonce": 231, "deleted": 4, "links": 14, "q": 355, "caps": 19, "laughs": 0, "swear": 132, "peak": 21, "night": 373, "morn": 40, "lat": 9.0, "fav": ["🤣"], "sig": ["ella", 35], "le": 404, "text": 3947}, "bignami": {"msgs": 1660, "share": 1.7, "avgw": 5.33, "sticker": 47, "audio": 15, "image": 29, "video": 8, "viewonce": 66, "deleted": 1, "links": 3, "q": 38, "caps": 19, "laughs": 3, "swear": 85, "peak": 21, "night": 177, "morn": 31, "lat": 12.0, "fav": ["🤣"], "sig": null, "le": 28, "text": 1459}, "Piane": {"msgs": 14615, "share": 15.0, "avgw": 4.41, "sticker": 101, "audio": 146, "image": 38, "video": 40, "viewonce": 958, "deleted": 9, "links": 65, "q": 386, "caps": 32, "laughs": 0, "swear": 1183, "peak": 21, "night": 1086, "morn": 368, "lat": 18.0, "fav": ["😂"], "sig": ["porcozzio", 68], "le": 1930, "text": 13257}, "Bossi": {"msgs": 6065, "share": 6.2, "avgw": 4.06, "sticker": 86, "audio": 11, "image": 45, "video": 47, "viewonce": 184, "deleted": 16, "links": 48, "q": 361, "caps": 106, "laughs": 3, "swear": 354, "peak": 21, "night": 336, "morn": 33, "lat": 8.0, "fav": ["🤣"], "sig": ["diocane", 97], "le": 1461, "text": 5589}, "stockihno": {"msgs": 4954, "share": 5.1, "avgw": 3.73, "sticker": 81, "audio": 25, "image": 61, "video": 8, "viewonce": 143, "deleted": 6, "links": 8, "q": 164, "caps": 43, "laughs": 0, "swear": 299, "peak": 21, "night": 140, "morn": 45, "lat": 9.0, "fav": ["🤣"], "sig": ["porco", 84], "le": 767, "text": 4611}, "Fornasieri": {"msgs": 3935, "share": 4.0, "avgw": 4.14, "sticker": 176, "audio": 15, "image": 16, "video": 2, "viewonce": 164, "deleted": 4, "links": 39, "q": 188, "caps": 2, "laughs": 0, "swear": 183, "peak": 21, "night": 104, "morn": 45, "lat": 13.0, "fav": ["🤣"], "sig": ["esce", 41], "le": 162, "text": 3519}, "Goffo": {"msgs": 2728, "share": 2.8, "avgw": 3.62, "sticker": 125, "audio": 27, "image": 9, "video": 3, "viewonce": 79, "deleted": 1, "links": 8, "q": 100, "caps": 47, "laughs": 4, "swear": 116, "peak": 14, "night": 288, "morn": 88, "lat": 12.0, "fav": ["🤣"], "sig": ["bravo", 24], "le": 1565, "text": 2475}, "Anto": {"msgs": 4082, "share": 4.2, "avgw": 4.83, "sticker": 99, "audio": 201, "image": 16, "video": 19, "viewonce": 254, "deleted": 5, "links": 42, "q": 358, "caps": 6, "laughs": 24, "swear": 184, "peak": 21, "night": 286, "morn": 116, "lat": 22.0, "fav": ["😂"], "sig": ["euro", 44], "le": 32, "text": 3444}, "fulvio": {"msgs": 9273, "share": 9.5, "avgw": 4.79, "sticker": 78, "audio": 72, "image": 22, "video": 16, "viewonce": 249, "deleted": 7, "links": 23, "q": 396, "caps": 8, "laughs": 19, "swear": 604, "peak": 14, "night": 424, "morn": 141, "lat": 12.0, "fav": ["🤣"], "sig": ["peró", 66], "le": 486, "text": 8779}, "pinzo": {"msgs": 4258, "share": 4.4, "avgw": 3.88, "sticker": 82, "audio": 10, "image": 11, "video": 12, "viewonce": 134, "deleted": 6, "links": 22, "q": 412, "caps": 63, "laughs": 42, "swear": 177, "peak": 21, "night": 236, "morn": 51, "lat": 20.0, "fav": ["🤣"], "sig": ["silvia", 25], "le": 162, "text": 3969}, "Lollocosciaa": {"msgs": 3089, "share": 3.2, "avgw": 4.68, "sticker": 59, "audio": 35, "image": 13, "video": 15, "viewonce": 173, "deleted": 1, "links": 5, "q": 178, "caps": 6, "laughs": 0, "swear": 162, "peak": 13, "night": 87, "morn": 15, "lat": 17.0, "fav": ["😹"], "sig": null, "le": 161, "text": 2774}, "Pat": {"msgs": 3911, "share": 4.0, "avgw": 3.78, "sticker": 52, "audio": 31, "image": 18, "video": 3, "viewonce": 174, "deleted": 1, "links": 6, "q": 198, "caps": 14, "laughs": 2, "swear": 218, "peak": 14, "night": 241, "morn": 92, "lat": 17.0, "fav": ["🤣"], "sig": ["porcoddio", 46], "le": 165, "text": 3592}, "montapuercos": {"msgs": 1797, "share": 1.8, "avgw": 3.5, "sticker": 83, "audio": 2, "image": 8, "video": 7, "viewonce": 39, "deleted": 1, "links": 2, "q": 144, "caps": 13, "laughs": 19, "swear": 67, "peak": 14, "night": 91, "morn": 16, "lat": 12.0, "fav": ["🤣"], "sig": ["bravo", 20], "le": 73, "text": 1643}, "alberto vergani": {"msgs": 677, "share": 0.7, "avgw": 3.98, "sticker": 34, "audio": 4, "image": 1, "video": 0, "viewonce": 15, "deleted": 0, "links": 4, "q": 61, "caps": 1, "laughs": 1, "swear": 24, "peak": 14, "night": 13, "morn": 4, "lat": 30.0, "fav": ["🤣"], "sig": ["pole", 17], "le": 77, "text": 614}, "Keiduz": {"msgs": 187, "share": 0.2, "avgw": 2.98, "sticker": 1, "audio": 0, "image": 0, "video": 0, "viewonce": 0, "deleted": 0, "links": 1, "q": 5, "caps": 2, "laughs": 0, "swear": 15, "peak": 21, "night": 32, "morn": 3, "lat": 21.0, "fav": ["🤣"], "sig": ["peso", 8], "le": 107, "text": 185}, "Valerius🍃": {"msgs": 1159, "share": 1.2, "avgw": 5.26, "sticker": 14, "audio": 1, "image": 5, "video": 0, "viewonce": 80, "deleted": 0, "links": 4, "q": 102, "caps": 0, "laughs": 0, "swear": 26, "peak": 21, "night": 40, "morn": 18, "lat": 57.5, "fav": ["😂"], "sig": ["stasera", 40], "le": 25, "text": 1047}, "Marco": {"msgs": 251, "share": 0.3, "avgw": 5.61, "sticker": 1, "audio": 1, "image": 2, "video": 0, "viewonce": 10, "deleted": 0, "links": 0, "q": 35, "caps": 3, "laughs": 5, "swear": 10, "peak": 14, "night": 8, "morn": 7, "lat": 49.0, "fav": ["😂"], "sig": null, "le": 18, "text": 236}, "Signo": {"msgs": 289, "share": 0.3, "avgw": 3.82, "sticker": 5, "audio": 0, "image": 1, "video": 0, "viewonce": 14, "deleted": 1, "links": 1, "q": 19, "caps": 2, "laughs": 0, "swear": 12, "peak": 14, "night": 30, "morn": 18, "lat": 13.0, "fav": ["🤣"], "sig": null, "le": 66, "text": 266}, "Keo": {"msgs": 245, "share": 0.3, "avgw": 5.34, "sticker": 1, "audio": 15, "image": 0, "video": 0, "viewonce": 3, "deleted": 0, "links": 0, "q": 9, "caps": 0, "laughs": 1, "swear": 9, "peak": 0, "night": 60, "morn": 16, "lat": 11.0, "fav": ["😂"], "sig": ["carlo", 9], "le": 22, "text": 220}}, "awards": [{"emoji": "🔫", "title": "Il Mitragliatore", "sub": "più messaggi in assoluto", "who": "criminale", "val": 16551, "unit": "messaggi"}, {"emoji": "📜", "title": "Il Filosofo", "sub": "messaggi più lunghi in media", "who": "bignami", "val": 5.33, "unit": "parole a messaggio"}, {"emoji": "🎙️", "title": "Il Podcaster", "sub": "più vocali", "who": "Anto", "val": 201, "unit": "vocali"}, {"emoji": "🎭", "title": "Lo Stickerista", "sub": "più sticker", "who": "criminale", "val": 1123, "unit": "sticker"}, {"emoji": "📸", "title": "Il Fotografo", "sub": "più foto e video", "who": "cacio", "val": 241, "unit": "foto+video"}, {"emoji": "🕵️", "title": "L'Agente Segreto", "sub": "più visualizzazioni singole", "who": "Piane", "val": 958, "unit": "view once"}, {"emoji": "⚡", "title": "Il Flash", "sub": "risponde più in fretta (mediana)", "who": "Bossi", "val": 8.0, "unit": "secondi"}, {"emoji": "🦥", "title": "Il Bradipo", "sub": "risponde più lento (mediana)", "who": "Valerius🍃", "val": 57.5, "unit": "secondi"}, {"emoji": "🧛", "title": "Il Vampiro", "sub": "più messaggi tra mezzanotte e le 5", "who": "Piane", "val": 1086, "unit": "messaggi di notte"}, {"emoji": "🐓", "title": "Il Mattiniero", "sub": "più messaggi 5–9 in proporzione", "who": "Goffo", "val": 3.2, "unit": "% dei suoi messaggi"}, {"emoji": "🔔", "title": "Lo Starter", "sub": "riaccende la chat dopo 6h di silenzio", "who": "Piane", "val": 51, "unit": "risvegli"}, {"emoji": "⚰️", "title": "Il Becchino", "sub": "ultimo messaggio prima di 6h di silenzio", "who": "Piane", "val": 89, "unit": "volte"}, {"emoji": "🏷️", "title": "Il Tagger", "sub": "chi tagga di più", "who": "criminale", "val": 1385, "unit": "@menzioni"}, {"emoji": "🎯", "title": "Il Più Cercato", "sub": "il più taggato", "who": "Anto", "val": 346, "unit": "volte"}, {"emoji": "🤣", "title": "Il Ridanciano", "sub": "più emoji che ridono", "who": "Piane", "val": 1930, "unit": "🤣😂😹"}, {"emoji": "📰", "title": "Il Giornalista", "sub": "più link condivisi", "who": "Piane", "val": 65, "unit": "link"}, {"emoji": "📢", "title": "L'Urlatore", "sub": "più MAIUSCOLO in proporzione", "who": "Gabri Gallina", "val": 300, "unit": "messaggi in CAPS"}, {"emoji": "❓", "title": "Il Curioso", "sub": "più punti interrogativi in proporzione", "who": "cacio", "val": 13.2, "unit": "% con ?"}, {"emoji": "🧽", "title": "Il Cancellatore", "sub": "più messaggi eliminati", "who": "Bossi", "val": 16, "unit": "eliminati"}, {"emoji": "🧼", "title": "Bocca di Rosa", "sub": "più parolacce in proporzione", "who": "Piane", "val": 8.9, "unit": "% dei messaggi"}], "consec": [237, "criminale", "2026-01-11"], "gap_hours": 70.2, "gap_start": "2026-08-09", "pairs": [["Piane", "criminale", 4151], ["criminale", "fulvio", 2535], ["Piane", "fulvio", 1756], ["Bossi", "criminale", 1604], ["Gabri Gallina", "criminale", 1478]], "top_days": [["2026-02-28", 1782], ["2026-01-11", 1378], ["2026-02-21", 1237], ["2026-01-01", 1139], ["2025-10-22", 1081], ["2026-01-31", 1080]], "busiest_words": [["cazzo", 54], ["milano", 47], ["andiamo", 46], ["peso", 33], ["macchina", 29], ["rooftop", 27], ["pole", 26], ["penso", 25], ["pinez", 24], ["stase", 23]], "hours": [1730, 975, 916, 692, 766, 662, 239, 302, 463, 706, 1849, 3717, 6692, 9523, 11352, 6911, 5071, 4296, 5105, 6211, 9474, 11732, 5397, 2659], "weekday": [9844, 9355, 12256, 12334, 14557, 21953, 17141], "months": [["2025-10", 8133], ["2025-11", 5108], ["2025-12", 9359], ["2026-01", 10903], ["2026-02", 11048], ["2026-03", 9097], ["2026-04", 7058], ["2026-05", 7827], ["2026-06", 5785], ["2026-07", 5998], ["2026-08", 4475], ["2026-09", 7609], ["2026-10", 5040]], "top_emoji": [["🤣", 5588], ["😂", 4342], ["😭", 301], ["😴", 221], ["😹", 187], ["🍃", 129]], "calls": 48, "words": 375801, "longest": [313, "bignami"], "titles": {"lollo forna": {"emoji": "🚪", "title": "Il Disertore", "tag": "Un \"non posso\" al giorno toglie l'uscita di torno.", "stat": "7 volte tra \"non posso\", \"passo\", \"non vengo\"", "lift": 2.0}, "criminale": {"emoji": "😩", "title": "Il Piagnone", "tag": "Che palle, che schifo, che noia: si lamenta con stile.", "stat": "345 volte tra lamenti", "lift": 1.6}, "Gabri Gallina": {"emoji": "📡", "title": "Il Radar", "tag": "Capta ogni novità sentimentale nel raggio di dieci chilometri.", "stat": "1,4% dei messaggi parla di ragazze e uscite", "lift": 1.6}, "bignami": {"emoji": "⚽", "title": "Il Mister", "tag": "Allena la nazionale dal telefono.", "stat": "3,8% dei messaggi parla di calcio", "lift": 3.8}, "Piane": {"emoji": "🗡️", "title": "Il Poeta Maledetto", "tag": "Dice \"coglione\" con affetto.", "stat": "287 volte tra insulti affettuosi", "lift": 1.5}, "cacio": {"emoji": "🐕", "title": "L'Amico degli Animali", "tag": "Cani e gatti hanno sempre un posto in prima fila.", "stat": "1,0% dei messaggi parla di animali", "lift": 3.2}, "Goffo": {"emoji": "🎮", "title": "Il Giocatore", "tag": "Il vero lavoro comincia la sera, davanti allo schermo.", "stat": "0,7% dei messaggi parla di videogiochi", "lift": 3.3}, "Fornasieri": {"emoji": "🎩", "title": "Il Gentiluomo", "tag": "Dice grazie. Nel 2026.", "stat": "9 volte tra \"grazie\"", "lift": 1.9}, "Anto": {"emoji": "💌", "title": "Il Romanticone", "tag": "Amore, bacio, ti voglio bene: il cuore del gruppo.", "stat": "6 volte tra frasi d'amore", "lift": 2.7}, "fulvio": {"emoji": "📣", "title": "Il Capo Gita", "tag": "Ogni messaggio è un invito: andiamo, venite, facciamo.", "stat": "1182 volte tra inviti a uscire", "lift": 1.8}, "pinzo": {"emoji": "🏋️", "title": "Il Palestrato", "tag": "Tra una serie e l'altra scrive nel gruppo.", "stat": "0,7% dei messaggi parla di palestra e pesi", "lift": 3.4}, "Lollocosciaa": {"emoji": "🕊️", "title": "Il Diplomatico", "tag": "Chiede scusa ancora prima di litigare.", "stat": "15 volte tra \"scusa\" e \"mi dispiace\"", "lift": 3.4}, "montapuercos": {"emoji": "🍕", "title": "Il Buongustaio", "tag": "Prima si decide dove mangiare, poi tutto il resto.", "stat": "0,9% dei messaggi parla di cibo", "lift": 1.4}, "alberto vergani": {"emoji": "⏳", "title": "Il Ritardatario", "tag": "È sempre sul punto di arrivare.", "stat": "6 volte tra \"arrivo\", \"due minuti\", \"ritardo\"", "lift": 1.9}, "Valerius🍃": {"emoji": "📣", "title": "Il Cheerleader", "tag": "Bravo, grande, mitico: il tifo non manca mai.", "stat": "19 volte tra complimenti", "lift": 2.8}, "Marco": {"emoji": "🎓", "title": "Lo Studente Modello", "tag": "L'unico che nomina esami e lavoro senza ironia.", "stat": "3,8% dei messaggi parla di lavoro e università", "lift": 7.8}, "Signo": {"emoji": "🤔", "title": "Il Dubbioso", "tag": "Forse, magari, boh: una certezza non l'ha mai data.", "stat": "17 volte tra \"forse\", \"magari\", \"boh\"", "lift": 1.8}, "Keo": {"emoji": "⚖️", "title": "L'Avvocato del Diavolo", "tag": "Non è vero, ma che dici: contraddice per sport.", "stat": "7 volte tra contraddizioni", "lift": 2.1}, "Bossi": {"emoji": "🤣", "title": "Il Recordman della Risata", "tag": "Una risata sola non gli basta.", "stat": "risata più lunga: 42 lettere, il 19 gennaio 2026", "lift": 0}, "ruiz": {"emoji": "🚑", "title": "Il Pronto Intervento", "tag": "Risponde prima che tu finisca di scrivere.", "stat": "risponde in 9 secondi, di solito con 🤣", "lift": 0}, "stockihno": {"emoji": "🪨", "title": "Il Signore del Peso", "tag": "Tutto è peso: la serata, la partita, la vita.", "stat": "\"peso\" 136 volte, il massimo del gruppo", "lift": 0}, "Pat": {"emoji": "📯", "title": "Il Banditore", "tag": "Il richiamo della foresta: venite, venite, venite.", "stat": "\"venite\" 73 volte, record in proporzione", "lift": 0}, "Keiduz": {"emoji": "🎙️", "title": "Il Telecronista", "tag": "Commenta la giocata anche quando non c'è il campo.", "stat": "5 messaggi su campi, partite e giocate", "lift": 0}}, "fights": [["2026-02-28", "21:05", 115, "Chi guida a Milano?", [["fulvio", 32], ["Piane", 29], ["criminale", 24]]], ["2026-01-31", "21:46", 165, "Il processo alla guida: chi fa l'andata e chi il ritorno", [["criminale", 43], ["fulvio", 26], ["Gabri Gallina", 22]]], ["2026-02-06", "12:49", 108, "Compleanno, discoteca e chi deve guidare", [["criminale", 40], ["Piane", 20], ["cacio", 13]]], ["2026-10-16", "11:55", 70, "Terrazza 21, bocce e furgone", [["pinzo", 31], ["Piane", 24], ["fulvio", 14]]], ["2026-10-13", "13:17", 59, "Martello, pinze e discarica", [["Gabri Gallina", 20], ["Piane", 15], ["criminale", 13]]]], "litigio": {"top": [["Piane", 750, 5.7], ["stockihno", 254, 5.5], ["Anto", 164, 4.8]], "pacifista": [["Valerius🍃", 7, 0.7]]}, "litpairs": [["Piane", "criminale", 164], ["criminale", "fulvio", 102], ["Piane", "fulvio", 92], ["criminale", "stockihno", 79]], "extra": {"guida": {"total": 601, "top": [["criminale", 101], ["fulvio", 91], ["Piane", 59], ["Gabri Gallina", 57]], "rate": [["bignami", 0.013040494166094716], ["Signo", 0.011278195488721804], ["fulvio", 0.01039050011418132]]}, "gas": {"total": 1615, "top": [["Piane", 412], ["criminale", 263], ["fulvio", 178], ["Bossi", 114]], "rate": [["Valerius🍃", 0.0660287081339713], ["Piane", 0.031190854720266486], ["Signo", 0.02631578947368421]]}, "fra": {"total": 4206, "top": [["criminale", 627], ["fulvio", 502], ["Gabri Gallina", 497], ["Piane", 458]], "rate": [["Keo", 0.10267857142857142], ["Signo", 0.10150375939849623], ["Lollocosciaa", 0.09314079422382672]]}, "tvb": {"total": 12, "top": [["pinzo", 4], ["Fornasieri", 2], ["Piane", 2], ["stockihno", 1]], "rate": [["pinzo", 0.001010611419909045], ["Fornasieri", 0.0005735589331803843], ["stockihno", 0.00021668472372697725]]}, "buongiorno": {"total": 16, "top": [["Gabri Gallina", 6], ["criminale", 2], ["Anto", 2], ["ruiz", 2]], "rate": [["Gabri Gallina", 0.0008161044613710555], ["Anto", 0.000584966364434045], ["ruiz", 0.0005078720162519045]]}, "buonanotte": {"total": 88, "top": [["criminale", 21], ["Piane", 12], ["Anto", 11], ["pinzo", 6]], "rate": [["Keiduz", 0.005405405405405406], ["Anto", 0.0032173150043872476], ["Valerius🍃", 0.0028708133971291866]]}, "vaff": {"total": 62, "top": [["Piane", 20], ["Gabri Gallina", 16], ["fulvio", 8], ["criminale", 3]], "rate": [["Gabri Gallina", 0.002176278563656148], ["Piane", 0.0015141191611779848], ["lollo forna", 0.0012106537530266344]]}, "coglione": {"total": 561, "top": [["Piane", 121], ["criminale", 84], ["fulvio", 70], ["Gabri Gallina", 67]], "rate": [["Keo", 0.026785714285714284], ["stockihno", 0.011484290357529793], ["Piane", 0.009160420925126807]]}, "grazie": {"total": 119, "top": [["Piane", 26], ["criminale", 10], ["pinzo", 10], ["Fornasieri", 9]], "rate": [["Marco", 0.00423728813559322], ["Fornasieri", 0.0025810151993117293], ["pinzo", 0.0025265285497726125]]}, "scusa": {"total": 133, "top": [["Piane", 29], ["fulvio", 21], ["Bossi", 14], ["criminale", 11]], "rate": [["Keo", 0.008928571428571428], ["lollo forna", 0.004842615012106538], ["Bossi", 0.002516627718856732]]}, "mamma": {"total": 440, "top": [["criminale", 95], ["Piane", 75], ["Gabri Gallina", 55], ["Bossi", 48]], "rate": [["Anto", 0.009651945013161743], ["Bossi", 0.008628437893223082], ["Gabri Gallina", 0.0074809575625680086]]}, "soldi": {"total": 503, "top": [["criminale", 154], ["Piane", 85], ["Anto", 62], ["fulvio", 31]], "rate": [["Anto", 0.018133957297455396], ["criminale", 0.010538561554779991], ["Pat", 0.008048848182070497]]}, "ahah": {"total": 504, "top": [["Gabri Gallina", 395], ["pinzo", 36], ["Anto", 24], ["montapuercos", 17]], "rate": [["Gabri Gallina", 0.053726877040261155], ["montapuercos", 0.010340632603406326], ["pinzo", 0.009095502779181405]]}, "laugh": [42, "Bossi", "2026-01-19"]}, "coglione_top": [["Piane", 121]], "vocab": {"parole": [["stase", "stasera", 1142, "criminale"], ["gas · gasa · gaina · sgasare", "carica, entusiasmo; sgasare = uscire e fare serata", 1863, "Piane"], ["peso", "figo, intenso", 1171, "Piane"], ["teso", "quasi sinonimo di peso", 53, "Piane"], ["sticazzi", "chissenefrega", 710, "criminale"], ["pome", "pomeriggio", 404, "criminale"], ["botto", "tanto, molto", 394, "criminale"], ["famo", "facciamo", 361, "fulvio"], ["sbatti", "fatica, rottura", 248, "Piane"], ["sincero", "intercalare a fine frase", 205, "Piane"], ["spacca", "è bellissimo, è fortissimo", 148, "fulvio"], ["aura", "carisma, stile", 97, "Piane"], ["stra", "molto", 81, "criminale"], ["bbasta", "basta, ma urlato", 82, "Piane"], ["since", "onestamente", 69, "Lollocosciaa"], ["situa", "situazione", 163, "Piane"], ["siga", "sigaretta", 58, "criminale"], ["ceh · ella · uella · ooo", "richiami e interiezioni", 412, "Bossi"], ["fra · frate", "il vocativo universale", 3894, "criminale"], ["raga · zio", "gli altri due vocativi", 973, "Gabri Gallina"], ["porcozio · porcozzio · diocaro", "esclamazioni d'autore", 259, "Piane"]], "posti": [["bergora", "il campo, ma anche verbo: \"chi bergora?\"", 293, "criminale"], ["cortile", "il ritrovo", 406, "fulvio"], ["deep", "", 675, "criminale"], ["village", "", 372, "Piane"], ["casinò", "", 249, "criminale"], ["bloom", "", 196, "criminale"], ["mustonate", "", 155, "fulvio"], ["brusino", "", 140, "fulvio"], ["biumo inf", "", 123, "criminale"], ["tribu", "", 103, "Piane"], ["pirola", "un bar", 90, "criminale"], ["cava", "", 78, "Piane"], ["gazzada", "", 73, "fulvio"], ["schiranna", "", 70, "Piane"], ["belve", "", 60, "criminale"], ["sentimento", "", 57, "fulvio"], ["ritual", "", 54, "criminale"]], "soprannomi": [["sosa", "soprannome di ruiz. Leggenda: ha limonato il cane di Eli. Ultime voci: punta anche Kobe, il cane di Pat.", 323, "fulvio"], ["ninfo", "Lollocosciaa", 79, "criminale"], ["pinez", "Piane", 455, "criminale"], ["denu", "cacio", 95, "fulvio"], ["caciotta", "cacio, versione estesa", 82, "Piane"], ["bigno", "bignami", 83, "fulvio"], ["keidi", "Keiduz", 96, "criminale"]]}, "mamme": {"list": [["nuccia", 51, "criminale"], ["adriana", 32, "Piane"], ["tiziana", 15, "criminale"], ["monica", 14, "criminale"], ["paola", 13, "stockihno"]], "tuamadre": [235, "criminale", 68], "madre": 440}};
+const f = n => Number(n).toLocaleString('it-IT');
+const f1 = n => Number(n).toLocaleString('it-IT',{maximumFractionDigits:1});
+const date = s => new Date(s+'T12:00:00').toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
+const ME = 'Lollocosciaa';
+const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const you = n => n===ME ? '<span class="you">tu</span>' : '';
+const slide = (cls, html) => `<section class="slide ${cls}"><div class="in">${html}</div></section>`;
+const bars = (rows, max, opts={}) => `<div class="bars ${opts.cls||''}">` + rows.map((r,i)=>`<div class="row ${i===0?'top':''}">${opts.rank?`<span class="rk">${i+1}</span>`:''}<span class="nm">${esc(r[0])}${opts.you?you(r[0]):''}</span><span class="tr"><span class="fl" style="display:block;width:${Math.max(1,r[1]/max*100)}%"></span></span><span class="v">${opts.fmt?opts.fmt(r):f(r[1])}</span></div>`).join('') + '</div>';
+
+const players = Object.entries(D.card).sort((a,b)=>b[1].msgs-a[1].msgs);
+const perDay = Math.round(D.total/D.days);
+const k = D.kinds;
+const hrs = D.hours, hmax = Math.max(...hrs), hpk = hrs.indexOf(hmax), hmin = hrs.indexOf(Math.min(...hrs));
+const wd = D.weekday, wdl = ['Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato','Domenica'];
+const mNames = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+const mlabel = ym => { const [y,m]=ym.split('-'); return mNames[+m-1]+' '+y.slice(2); };
+const bestM = D.months.reduce((a,b)=>b[1]>a[1]?b:a);
+const bd = D.top_days[0];
+const aw = D.awards;
+const find = t => aw.find(a=>a.title===t);
+
+let h = '';
+
+h += slide('s-intro', `
+  <p class="tag">${date(D.first)} → ${date(D.last)}</p>
+  <h1>Gite<br>d'Emergenza<br><span style="color:var(--lime)">Wrapped</span></h1>
+  <p class="lead">Un anno di chat di gruppo, ${D.days} giorni, ${players.length} voci. Ecco chi ha scritto cosa, a che ora e quante volte.</p>
+  <p class="cue">scorri ↓</p>`);
+
+h += slide('s-num', `
+  <p class="tag">Il volume</p>
+  <div class="big num">${f(D.total)}</div>
+  <h2>messaggi in ${D.days} giorni</h2>
+  <p class="lead">Fanno ${f(perDay)} messaggi al giorno, ogni giorno, compresi quelli in cui nessuno aveva niente da dire. Le parole scritte sono ${f(D.words)}: più di quattro romanzi.</p>
+  <div class="stats">
+    <div class="stat"><b>${f(k.sticker)}</b><span>sticker</span></div>
+    <div class="stat"><b>${f(k.audio)}</b><span>vocali</span></div>
+    <div class="stat"><b>${f(k.image)}</b><span>foto</span></div>
+    <div class="stat"><b>${f(k.video)}</b><span>video</span></div>
+    <div class="stat"><b>${f(k.GIF)}</b><span>GIF</span></div>
+    <div class="stat"><b>${f(k.viewonce)}</b><span>visualizzazioni singole</span></div>
+    <div class="stat"><b>${f(k.poll)}</b><span>sondaggi</span></div>
+    <div class="stat"><b>${f(D.calls)}</b><span>chiamate di gruppo</span></div>
+  </div>`);
+
+h += slide('s-who', `
+  <p class="tag">Chi parla</p>
+  <h2>${esc(players[0][0])} ha scritto il ${f1(players[0][1].share)}% della chat</h2>
+  <p class="lead">${f(players[0][1].msgs)} messaggi da solo. ${esc(players[1][0])} segue con ${f(players[1][1].msgs)} e ${esc(players[2][0])} con ${f(players[2][1].msgs)}.</p>
+  ${bars(players.map(([n,c])=>[n,c.msgs]), players[0][1].msgs, {})}
+  <p class="note">Conta solo chi ha scritto almeno 100 messaggi. "lollo forna" e "Lollocosciaa" sono due partecipanti diversi.</p>`);
+
+const tw = D.top_words;
+h += slide('s-words', `
+  <p class="tag">La classifica delle parole</p>
+  <h2>Le 20 parole più usate</h2>
+  <p class="lead">Al primo posto "${esc(tw[0][0])}", ${f(tw[0][1])} volte. Tolti articoli, preposizioni e risate.</p>
+  ${bars(tw, tw[0][1], {cls:'words', rank:true})}
+  <div class="stats">
+    <div class="stat"><b>${f(D.swear_total)}</b><span>parolacce classiche (cazzo, merda, sticazzi e simili)</span></div>
+    <div class="stat"><b>${f(D.dio_total)}</b><span>tra dio, porco, madonna e derivati</span></div>
+  </div>`);
+
+h += slide('s-emoji', `
+  <p class="tag">Emoji</p>
+  <h2>Si ride. Tantissimo.</h2>
+  <p class="lead">🤣 e 😂 insieme fanno ${f(D.top_emoji[0][1]+D.top_emoji[1][1])} emoji: più di una ogni dieci messaggi. Il re delle risate è ${esc(find('Il Ridanciano').who)} con ${f(find('Il Ridanciano').val)} tra 🤣, 😂 e 😹.</p>
+  <div class="emo">${D.top_emoji.map(([e,c])=>`<div><em>${e}</em><b>${f(c)}</b></div>`).join('')}</div>`);
+
+h += slide('s-time', `
+  <p class="tag">Gli orari</p>
+  <h2>Alle ${hpk} si scrive di più, alle ${hmin} non scrive nessuno</h2>
+  <p class="lead">Il picco è tra le ${hpk}:00 e le ${hpk+1}:00 con ${f(hmax)} messaggi. Alle ${hmin} ne arrivano appena ${f(hrs[hmin])}.</p>
+  <div><div class="hours">${hrs.map((v,i)=>`<i class="${i===hpk?'pk':''}" style="height:${v/hmax*100}%" title="${i}:00 · ${f(v)}"></i>`).join('')}</div>
+  <div class="hl">${hrs.map((v,i)=>`<span>${i%3===0?i:''}</span>`).join('')}</div></div>
+  <div class="cols">
+    <div><p class="tag" style="margin-bottom:10px">Giorno della settimana</p>${bars(wd.map((v,i)=>[wdl[i],v]), Math.max(...wd))}</div>
+    <div><p class="tag" style="margin-bottom:10px">Mese</p>${bars(D.months.map(([m,v])=>[mlabel(m),v]), bestM[1])}</div>
+  </div>`);
+
+h += slide('s-days', `
+  <p class="tag">I giorni record</p>
+  <h2>Il ${date(bd[0]).replace(/ \d{4}$/,'')} sono partiti ${f(bd[1])} messaggi</h2>
+  <p class="lead">Parole di quel giorno: ${D.busiest_words.slice(0,6).map(w=>esc(w[0])).join(', ')}.</p>
+  ${bars(D.top_days.map(([d,v])=>[date(d),v]), bd[1])}`);
+
+h += slide('s-awards', `
+  <p class="tag">I premi</p>
+  <h2>${aw.length} premi, ${new Set(aw.map(a=>a.who)).size} vincitori</h2>
+  <div class="agrid">${aw.map(a=>`<div class="aw"><span class="e">${a.emoji}</span><h3>${esc(a.title)}</h3><span class="sub">${esc(a.sub)}</span><span class="who">${esc(a.who)}</span><span class="val">${f1(a.val)} ${esc(a.unit)}</span></div>`).join('')}</div>
+  <p class="note">Premi "in proporzione" valgono solo per chi ha almeno 500 messaggi. Le risposte più veloci e lente sono la mediana tra un messaggio e la risposta entro un'ora.</p>`);
+
+const L = D.litigio, lp = D.litpairs, X = D.extra;
+h += slide('s-fight', `
+  <p class="tag">Chi discute di più</p>
+  <h2>Le 5 discussioni più infuocate</h2>
+  <p class="lead">Ho contato insulti, "non è vero", "ma che dici" e "zitto" nei blocchi di 10 minuti. Tre delle cinque maratone nascono dalla stessa domanda: chi guida?</p>
+  <div class="recs">${D.fights.map(([d,t,n,ti,who])=>`<div class="rec"><b>${n}</b><p><strong>${esc(ti)}</strong><br>${date(d)}, ore ${t}. ${n} messaggi in 10 minuti: ${who.map(w=>esc(w[0])+' '+w[1]).join(', ')}.</p></div>`).join('')}</div>
+  <div class="agrid">
+    <div class="aw"><span class="e">🥊</span><h3>Il Più Litigioso</h3><span class="sub">più punti litigio in proporzione</span><span class="who">${esc(L.top[0][0])}</span><span class="val">${f(L.top[0][1])} punti · ${f1(L.top[0][2])}% dei messaggi</span></div>
+    <div class="aw"><span class="e">🕊️</span><h3>Il Pacificatore</h3><span class="sub">il meno litigioso con oltre 1000 messaggi</span><span class="who">${esc(L.pacifista[0][0])}</span><span class="val">${f1(L.pacifista[0][2])}% dei messaggi</span></div>
+    <div class="aw"><span class="e">💥</span><h3>La Coppia Bellicosa</h3><span class="sub">si rinfacciano di più a vicenda</span><span class="who">${esc(lp[0][0])} + ${esc(lp[0][1])}</span><span class="val">${f(lp[0][2])} punti insieme</span></div>
+  </div>
+  ${bars(lp.map(p=>[p[0]+' + '+p[1],p[2]]), lp[0][2])}
+  <p class="note">Punti litigio: ogni insulto vale 2, ogni frase di disaccordo vale 1. La maggior parte sono battute tra amici.</p>`);
+
+h += slide('s-titles', `
+  <p class="tag">Un titolo a testa</p>
+  <h2>Cosa dice di te quello che scrivi</h2>
+  <p class="lead">Un titolo per ognuno, scelto in base a cosa scrive di più rispetto agli altri.</p>
+  <div class="agrid">${players.map(([n,c])=>{const t=D.titles[n]; return t?`<div class="aw"><span class="e">${t.emoji}</span><h3>${esc(t.title)}</h3><span class="sub">${esc(t.tag)}</span><span class="who">${esc(n)}${you(n)}</span><span class="val">${esc(t.stat)}</span></div>`:'';}).join('')}</div>`);
+
+const V = D.vocab;
+const vw = a => `<div class="vw"><b>${esc(a[0])}</b>${a[1]?`<span>${esc(a[1])}</span>`:''}<em>${f(a[2])} volte · più usata da ${esc(a[3])}</em></div>`;
+h += slide('s-vocab', `
+  <p class="tag">Il nostro vocabolario</p>
+  <h2>Dizionario del gruppo</h2>
+  <p class="lead">Parole, posti e soprannomi che chi non è in chat non può capire.</p>
+  <p class="vh">Parole</p><div class="vgrid">${V.parole.map(vw).join('')}</div>
+  <p class="vh">Posti</p><div class="vgrid">${V.posti.map(vw).join('')}</div>
+  <p class="vh">Soprannomi</p><div class="vgrid">${V.soprannomi.map(vw).join('')}</div>`);
+
+const MM = D.mamme;
+h += slide('s-mamme', `
+  <p class="tag">Le mamme più citate</p>
+  <h2>${esc(MM.list[0][0])} guida la classifica</h2>
+  <p class="lead">Messaggi che nominano ciascuna. Nessuna battuta, solo i numeri.</p>
+  ${bars(MM.list.map(x=>[x[0],x[1]]), MM.list[0][1], {rank:true, cls:'words'})}`);
+
+const pr = D.pairs[0];
+h += slide('s-rec', `
+  <p class="tag">Record e coppie</p>
+  <h2>Cose che non dovrebbero esistere</h2>
+  <div class="recs">
+    <div class="rec"><b>${f(pr[2])}</b><p><strong>${esc(pr[0])} e ${esc(pr[1])}</strong> si sono risposti a vicenda più di qualsiasi altra coppia. Secondi ${esc(D.pairs[1][0])} e ${esc(D.pairs[1][1])} con ${f(D.pairs[1][2])}.</p></div>
+    <div class="rec"><b>${f(D.consec[0])}</b><p><strong>${esc(D.consec[1])}</strong> ha scritto ${f(D.consec[0])} messaggi di fila senza che nessuno lo interrompesse, il ${date(D.consec[2])}.</p></div>
+    <div class="rec"><b>${f(Math.round(D.gap_hours))} ore</b><p>Il silenzio più lungo dell'anno, a partire dal ${date(D.gap_start)}.</p></div>
+    <div class="rec"><b>${f(D.longest[0])}</b><p>Parole nel messaggio più lungo, scritto da <strong>${esc(D.longest[1])}</strong>. Era un'informativa sulla festa.</p></div>
+  </div>`);
+
+const nmz = a => esc(a[0][0]);
+h += slide('s-useless', `
+  <p class="tag">Statistiche inutili</p>
+  <h2>Numeri che nessuno ha chiesto</h2>
+  <div class="recs">
+    <div class="rec"><b>${f(X.guida.total)}</b><p>volte che compaiono "guida", "guidare" o "patente". In testa ${esc(X.guida.top[0][0])} con ${X.guida.top[0][1]}, poi ${esc(X.guida.top[1][0])} con ${X.guida.top[1][1]}.</p></div>
+    <div class="rec"><b>${f(X.coglione.total)}</b><p>"coglione" e derivati, contro ${X.tvb.total} tra "ti voglio bene", "ti amo", "ti stimo" e "ti adoro". Il più generoso con gli insulti è ${esc(X.coglione.top[0][0])} (${X.coglione.top[0][1]}).</p></div>
+    <div class="rec"><b>${f(X.fra.total)}</b><p>tra "fra", "frate", "bro" e "fratello". ${esc(X.fra.top[0][0])} da solo ne ha scritti ${X.fra.top[0][1]}.</p></div>
+    <div class="rec"><b>${f(X.gas.total)}</b><p>"gas", "gasa", "gaina" e simili. In proporzione vince ${esc(X.gas.rate[0][0])} con il ${f1(X.gas.rate[0][1]*100)}% dei messaggi.</p></div>
+    <div class="rec"><b>${X.laugh[0]}</b><p>lettere nella risata più lunga, di ${esc(X.laugh[1])}, il ${date(X.laugh[2])}.</p></div>
+    <div class="rec"><b>${X.buongiorno.total}</b><p>"buongiorno" in un anno, ${X.buongiorno.top[0][1]} da ${esc(X.buongiorno.top[0][0])}. Il gruppo è molto più da "stasera".</p></div>
+    <div class="rec"><b>${X.vaff.total}</b><p>"vaffanculo" e "fanculo". ${esc(X.vaff.top[0][0])} ne ha mandati ${X.vaff.top[0][1]}.</p></div>
+  </div>`);
+
+const hr = x => x+':00';
+h += slide('s-cards', `
+  <p class="tag">Le carte dei giocatori</p>
+  <h2>Una carta a testa</h2>
+  <div class="pgrid">${players.map(([n,c])=>{
+    const mine = aw.filter(a=>a.who===n);
+    const sg = c.sig ? [c.sig[0],'parola firma'] : null;
+    return `<div class="pc"><header><h3>${esc(n)}${you(n)}</h3><span class="fe">${c.fav&&c.fav[0]?c.fav[0]:''}</span></header>
+    <dl><dt>messaggi</dt><dd>${f(c.msgs)} · ${f1(c.share)}%</dd>
+    <dt>parola firma</dt><dd>${sg?esc(sg[0]):esc((D.topword[n]||['–'])[0])}</dd>
+    <dt>ora preferita</dt><dd>${hr(c.peak)}</dd>
+    <dt>parole/messaggio</dt><dd>${f1(c.avgw)}</dd>
+    <dt>sticker · vocali</dt><dd>${f(c.sticker)} · ${f(c.audio)}</dd></dl>
+    <div class="chips">${D.titles[n]?`<span class="chip" style="background:var(--paper)">${D.titles[n].emoji} ${esc(D.titles[n].title)}</span>`:''}${mine.map(a=>`<span class="chip">${a.emoji} ${esc(a.title)}</span>`).join('')}</div></div>`;}).join('')}</div>
+  <p class="note">Dove manca una parola firma distintiva compare la parola più usata. Le ore sono quelle registrate nell'esportazione.</p>`);
+
+h += slide('s-end', `
+  <p class="tag">Fine</p>
+  <h1>Alla prossima gita</h1>
+  <p class="lead">${f(D.total)} messaggi dopo, il gruppo è sempre lo stesso.</p>`);
+
+document.getElementById('app').innerHTML = h;
+</script>
+</body>
+</html>
